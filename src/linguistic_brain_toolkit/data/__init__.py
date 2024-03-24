@@ -1,4 +1,6 @@
-from .sqlite_operations import check_textgrid_files
-from .sqlite_operations import is_valid_textgrid
-from .sqlite_operations import load_single_dataframe
-from .sqlite_operations import load_dataframes_to_db
+from .textgrid_operations import check_textgrid_files
+from .textgrid_operations import is_valid_textgrid
+from .textgrid_operations import load_single_dataframe
+from .textgrid_operations import load_dataframes_to_db
+
+from .sqlite_operations import load_dataframe_to_sqlite
