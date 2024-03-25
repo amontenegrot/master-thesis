@@ -11,8 +11,8 @@ DATABASE_FOLDER = PATH + 'data/processed/transcriptions.db'
 df = read_data_from_database(DATABASE_FOLDER, 'general')
 
 # Preprocessing
-df['name'] = df['name'].str.lower()
-df['tier'].value_counts()
+df = df.rename({'name':'graphemic_word'}, axis=1)
+df['graphemic_word'] = df['graphemic_word'].str.lower()
 
 df_graphemic_transcrip = df.query("tier == 'word'").copy()
 
@@ -24,7 +24,7 @@ condition = df_graphemic_transcrip.astype(str).apply(
 df_filtered = df_graphemic_transcrip[~condition].copy()
 
 # NLP
-df_processed = apply_lemmatization_and_pos_tags(df_filtered, 'name', 'large')
+df_processed = apply_lemmatization_and_pos_tags(df_filtered, 'graphemic_word', 'large')
 del df, df_graphemic_transcrip, df_filtered  # Delete dataframes to free memory
 df_processed.head()
 
