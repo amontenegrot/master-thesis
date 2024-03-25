@@ -37,3 +37,48 @@ En este proyecto, seguimos ciertas convenciones de nomenclatura para nuestras ra
   Esta rama se utiliza para trabajar en la implementación de medidas de seguridad como una tarea general dentro del proyecto.
 
 Al seguir estas convenciones, buscamos mantener un flujo de trabajo organizado y comprensible para todos los miembros del equipo.
+
+# Instalación de modelos spaCy
+
+Para utilizar spaCy en tu entorno de Python, necesitarás instalar los modelos lingüísticos adecuados. spaCy proporciona varios modelos pre-entrenados para diferentes tamaños y usos. A continuación, se muestra cómo instalar los modelos 'en_core_web_sm', 'en_core_web_md' y 'en_core_web_lg':
+
+## Instalación de 'en_core_web_sm'
+
+Este modelo es más pequeño y tiene menos funcionalidades en comparación con los otros modelos, pero es útil para tareas básicas de procesamiento de texto.
+
+```bash
+python -m spacy download en_core_web_sm
+```
+
+## Instalación de 'en_core_web_md'
+
+Este modelo es de tamaño medio y ofrece un equilibrio entre precisión y velocidad, siendo adecuado para una amplia gama de aplicaciones de procesamiento de lenguaje natural.
+
+```
+python -m spacy download en_core_web_md
+```
+
+## Instalación de 'en_core_web_lg'
+
+Este modelo es el más grande de los tres y proporciona una mayor precisión en tareas avanzadas de procesamiento de texto, pero puede requerir más recursos computacionales.
+
+```
+python -m spacy download en_core_web_lg
+```
+
+## Carga del modelo en el script de Python
+
+Después de la instalación de cada modelo, podrás cargarlos en tu código de Python utilizando spaCy, por ejemplo:
+
+```python
+import spacy
+
+# Cargar el modelo 'en_core_web_sm'
+nlp_sm = spacy.load('en_core_web_sm')
+
+# Cargar el modelo 'en_core_web_md'
+nlp_md = spacy.load('en_core_web_md')
+
+# Cargar el modelo 'en_core_web_lg'
+nlp_lg = spacy.load('en_core_web_lg')
+```

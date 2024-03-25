@@ -3,4 +3,5 @@ from .textgrid_operations import is_valid_textgrid
 from .textgrid_operations import load_single_dataframe
 from .textgrid_operations import load_dataframes_to_db
 
+from .sqlite_operations import read_data_from_database
 from .sqlite_operations import load_dataframe_to_sqlite
