@@ -16,7 +16,7 @@ df['orthographic_word'] = df['orthographic_word'].str.lower()
 
 # Word replacement to facilitate the task of post tagging
 manual_word_corrections_dict = {
-    'that''s': 'that is',
+    'that\'\'s': 'that is',
     't-shirt': 'tee shirt',
     'id\'s': 'identifiers',
     'q-tip': 'cotton swab',
