@@ -14,6 +14,18 @@ df = read_data_from_database(DATABASE_FOLDER, 'general')
 df = df.rename({'name':'orthographic_word'}, axis=1)
 df['orthographic_word'] = df['orthographic_word'].str.lower()
 
+# Word replacement to facilitate the task of post tagging
+manual_word_corrections_dict = {
+    'that''s': 'that is',
+    't-shirt': 'tee shirt',
+    'id\'s': 'identifiers',
+    'q-tip': 'cotton swab',
+    'de-gay': 'Desexualize',
+    'e-mail': 'email',
+    'co-opted': 'Appropriated'
+}
+df['orthographic_word'] = df['orthographic_word'].replace(manual_word_corrections_dict, regex=True)
+
 df_orthographic_transcription = df.query("tier == 'word'").copy()
 
 # Eliminate non-linguistic sounds: silences, clapping, noises, etc.
