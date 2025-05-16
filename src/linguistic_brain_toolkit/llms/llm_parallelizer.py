@@ -27,7 +27,7 @@ class LLMParallelProcessor:
     def process_batches(
             self,
             df: pd.DataFrame,
-            data_colum: str,
+            data_column: str,
             prompt_column: str,
             result_column: str,
             data_placeholder: str) -> None:
@@ -40,7 +40,7 @@ class LLMParallelProcessor:
 
         Args:
             df (pd.DataFrame): DataFrame containing the data and prompt templates.
-            data_colum (str): Name of the column that contains the data to be inserted.
+            data_column (str): Name of the column that contains the data to be inserted.
             prompt_column (str): Name of the column that contains the prompt templates.
             result_column (str): Name of the column where the responses will be stored.
             data_placeholder (str): Placeholder in the prompt template to be replaced with the data.
@@ -49,7 +49,7 @@ class LLMParallelProcessor:
             df[result_column] = None
 
         for i in range(0, len(df), self.batch_size):
-            batch_data = df[data_colum][i:i + self.batch_size].tolist()
+            batch_data = df[data_column][i:i + self.batch_size].tolist()
             batch_prompts = df[prompt_column][i:i + self.batch_size].tolist()
 
             # Create formatted prompts by replacing the placeholder with the corresponding data.
@@ -70,19 +70,19 @@ class LLMParallelProcessor:
 
             # Build a mapping dictionary for non-null batch data.
             mapping = {
-                data: responses[f'response_{idx + 1}'].content
+                data: responses[f'response_{idx + 1}']
                 for idx, data in enumerate(batch_data) if data is not None
             }
 
-            # Update the DataFrame in a vectorized manner for all rows whose 'data_colum'
+            # Update the DataFrame in a vectorized manner for all rows whose 'data_column'
             # value matches any key in 'mapping'. In case of duplicates, the last result is assigned.
             if mapping:
-                mask = df[data_colum].isin(mapping.keys())
-                df.loc[mask, result_column] = df.loc[mask, data_colum].map(mapping)
+                mask = df[data_column].isin(mapping.keys())
+                df.loc[mask, result_column] = df.loc[mask, data_column].map(mapping)
 
 
 def semi_format_prompt(
-        row: od.Series,
+        row: pd.Series,
         prompt_template: str,
         excluded_variables: List[str],
         **variable_values: List[str]
@@ -94,7 +94,7 @@ def semi_format_prompt(
     via keyword arguments.
 
     Args:
-        row (od.Series): Data row (not directly used in this function).
+        row (pd.Series): Data row (not directly used in this function).
         prompt_template (str): The prompt template containing placeholders.
         excluded_variables (List[str]): List of variable names that should not be replaced.
         **variable_values (List[str]): Values to substitute in the prompt, associated with their variable names.
