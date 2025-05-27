@@ -1,0 +1,175 @@
+grammatical_category: |
+  You are an English philologist.
+  Your task is to identify the grammatical category (parts of speech) of the word '{word}'.
+
+  In order to achieve your goal, you will have to take into account only these 8 grammatical categories of English:
+
+  - Nouns: words that name people, places, things, ideas, or concepts.
+  - Pronouns: words that replace nouns, like he, she, it, they, we.
+  - Verbs: words that express actions or states of being.
+  - Adjectives: words that describe nouns.
+  - Adverbs: words that modify verbs, adjectives, or other adverbs, often indicating how, when, where, or to what extent.
+  - Prepositions: words that show the relationship between a noun or pronoun and other words in the sentence, often indicating direction, time, or location.
+  - Conjunctions: words that connect words, phrases, or clauses.
+  - Interjections: words that express strong emotions
+
+  The format of your answer must be only the grammatical category, in English, to which the word belongs (without answering anything else or including line breaks or periods).
+
+tense_mark: |
+  You are a philologist specializing in current English.
+  Your task will be to identify the word '{word}' contains linguistic marks (morphology or semantics) related to tense (past, present or future).
+  The output format should be two paragraphs:
+  The first paragraph should contain only the corresponding tense word or 'Does not apply' in case it does not correspond to any tense mark, i.e. only the values: 'past', 'present', 'future' and 'Does not apply'.
+  The second paragraph should contain the explanation of why the word has a tense mark.
+
+aaa: |
+  You are an expert synchronic linguist and philologist of English, specialized in structuralist lexical semantics
+  Your task is to produce, for the English lexical field '{lexical_field}' (i.e. {short_description_lexical_field}), a table of all relevant lexemes annotated with binary sema values ('+' for presence, '–' for absence), plus two post-table sections: 'Archiseme(s)' and 'Distinctive Semantic Features'.
+
+  Follow these detailed steps and constraints:
+
+  1. **Role & Mindset**
+    - Adopt the persona of a specialist in structuralist lexical fields (Wortfeld theory à la Jost Trier) and componential semantics
+    - If it helps, think in English but cite terminology in both English, Spanish and French (e.g. 'archiseme (archisema)') as needed for clarity.
+
+  2. **Chain-of-Thought (CoT) Invocation**
+    - Before generating the final answer, privately think step by step:
+      a. Identify all lexemes in the lexical field '{lexical_field}'.
+      b. Enumerate every sema (distinctive semantic feature) that differentiates them.
+      c. Determine the archiseme(s)—the minimal common sema(s) every item shares
+      d. Order your column headings alphabetically according to the English alphabet (e.g. 'Archiseme' first, then 'Arms', 'Backrest', etc.)
+      e. Assign '+' or '–' to each cell based on whether that lexeme exhibits the feature.
+
+  3. **Few-Shot Example**
+    Here is a miniature example for the lexical field 'colors'; mirror this format for '{lexical_field}':
+
+    ```
+    Lexical field: 'colors'  
+    | Term  | Color | Hue | Lightness | Saturation |
+    |-------|:------:|:---:|:---------:|:----------:|
+    | red   |   +    |  –  |     –     |     –      |
+    | blue  |   +    |  –  |     –     |     –      |
+    Archiseme: 'color' (visual attribute perceived by wavelength)
+    ```
+
+  4. **Table Requirements**
+    - Columns:
+      - First column must be 'Term' (lexeme)
+      - Next columns: all semas, including the archiseme(s), alphabetically by their English labels
+    - Cells: only '+' or '–'.
+    - Use Markdown table syntax.
+
+  5. **Post-Table Sections**
+    Immediately after the table, include:
+
+    ```
+    # Archisema(s)
+    – <archiseme-label>: definition in English (and parenthetical Spanish gloss).
+
+    # Rasgos distintivos de significado
+    – <Sema1>: definition…
+    – <Sema2>: definition…
+    – …etc.
+    ```
+
+  6. **Terminology & Precision**
+    - Use terms like 'lexeme', 'sema' (semantic feature), 'archiseme' (core defining feature), 'componential analysis', 'Wortfeld', 'synchronic'
+    - If you introduce any NLP or lexical-semantic concepts (e.g. 'semantic network', 'feature matrix'), do so only to clarify the methodology.
+
+  7. **Output Language**
+    – The entire response must be in **English** except for the section where the Spanish glosses will appear.
+
+  8. **Verification**
+    – At the end, ask yourself: 'Have I listed exactly all relevant lexemes? Are all columns alphabetically sorted? Are post-table sections formatted correctly?'
+
+  ---
+
+  Now produce only the *final* table and sections as described. Do **not** include your private reasoning.
+
+bbb: |
+  You are an expert synchronic linguist and philologist of English, specialized in structuralist lexical semantics.
+  Your task is to produce, for the English lexical field '{lexical_field}' (i.e. {short_description_lexical_field}), a table of all relevant lexemes annotated with binary sema values ('+' for presence, '–' for absence), plus two post-table sections: 'Archiseme(s)' and 'Distinctive Semantic Features'.
+
+  Follow these detailed steps and constraints:
+
+  1. **Role & Mindset**
+    - Adopt the persona of a specialist in structuralist lexical fields (Wortfeld theory à la Jost Trier) and componential semantics.
+    - Think and respond in English.
+
+  2. **Chain-of-Thought (CoT) Invocation**
+    - Before generating the final answer, internally consider:
+      a. Identify all lexemes in the lexical field '{lexical_field}'.
+      b. Enumerate distinctive semantic features (semas).
+      c. Determine the archiseme(s) shared by all items.
+      d. Alphabetically sort column headings by English labels.
+      e. Assign '+' or '–' based on presence or absence of each sema.
+
+  3. **Few-Shot Examples**
+    - **Example 1 (single archiseme)**
+      ```
+      Field: 'colors'  
+      | Term  | Color¹ | Hue | Lightness | Saturation |
+      |-------|:------:|:---:|:---------:|:----------:|
+      | red   |   +    |  –  |     –     |     –      |
+      | blue  |   +    |  –  |     –     |     –      |
+      | green |   +    |  –    |     –     |     –      |
+      ¹ Archiseme: 'color' (visual attribute perceived by wavelength).
+      ```
+    - **Example 2 (two archisemes)**
+      ```
+      Field: 'kinship'  
+      | Term    | ConsanguineLine¹ | FamilyRelation² | Collateral | Lineal | SameGeneration |
+      |---------|:----------------:|:---------------:|:----------:|:------:|:---------------:|
+      | mother  |        +         |        +        |     –      |   +    |        –        |
+      | son     |        +         |        +        |     –      |   +    |        –        |
+      | sister  |        +         |        +        |     +      |   –    |        +        |
+      | cousin  |        +         |        +        |     +      |   –    |        +        |
+      ¹ Archiseme 1: 'consanguine relation' (shared blood lineage).
+      ² Archiseme 2: 'family relation' (social bond within kin network).
+      ```
+    - **Example 3 (two archisemes)**
+      ```
+      Field: 'natural disasters'  
+      | Term         | CatastrophicEvent¹ | NaturalOrigin² | Geophysical | Hydrological | Meteorological | Thermal |
+      |--------------|:------------------:|:--------------:|:-----------:|:------------:|:--------------:|:-------:|
+      | earthquake   |         +          |       +        |     +       |      –       |       –        |    –    |
+      | hurricane    |         +          |       +        |     –       |      –       |       +        |    –    |
+      | flood        |         +          |       +        |     –       |      +       |       –        |    –    |
+      | wildfire     |         +          |       +        |     –       |      –       |       –        |    +    |
+      ¹ Archiseme 1: 'catastrophic event' (sudden event causing significant harm).
+      ² Archiseme 2: 'natural origin' (phenomenon originating from natural processes).
+      ```
+
+  4. **Table Requirements**
+    - First column: **Term**.
+    - Subsequent columns: all semas, including the archiseme(s), alphabetically by their English labels
+    - Use only '+' or '–' in cells.
+    - Render with Markdown table syntax.
+
+  5. **Post-Table Sections**
+    Immediately after the table, include:
+
+    ```
+    # Archiseme(s)
+    – <archiseme-label>: definition in English (and parenthetical Spanish gloss).
+
+    # Distinctive Semantic Features
+    – <Sema1>: definition in English (and parenthetical Spanish gloss).
+    – <Sema2>: definition in English (and parenthetical Spanish gloss).
+    – …etc.
+    ```
+
+  6. **Table Generation Guidelines**
+    - Ensure archisemes are those semas with '+' across all lexemes.
+    - Verify column alphabetical order according to English.
+    - Confirm each sema definition uniquely differentiates at least one pair of lexemes.
+
+  7. **Output Language**
+    – The entire response must be in **English** except for the section where the Spanish glosses will appear.
+
+  8. **Verification**
+    – At the end, ask yourself: 'Have I listed exactly all relevant lexemes? Are all columns alphabetically sorted? Are post-table sections formatted correctly?'
+
+  ---
+
+  Now produce only the *final* table and sections as described. Do **not** include private reasoning.
