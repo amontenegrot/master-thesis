@@ -22,78 +22,14 @@ tense_mark: |
   The first paragraph should contain only the corresponding tense word or 'Does not apply' in case it does not correspond to any tense mark, i.e. only the values: 'past', 'present', 'future' and 'Does not apply'.
   The second paragraph should contain the explanation of why the word has a tense mark.
 
-aaa: |
-  You are an expert synchronic linguist and philologist of English, specialized in structuralist lexical semantics
-  Your task is to produce, for the English lexical field '{lexical_field}' (i.e. {short_description_lexical_field}), a table of all relevant lexemes annotated with binary sema values ('+' for presence, '–' for absence), plus two post-table sections: 'Archiseme(s)' and 'Distinctive Semantic Features'.
-
-  Follow these detailed steps and constraints:
-
-  1. **Role & Mindset**
-    - Adopt the persona of a specialist in structuralist lexical fields (Wortfeld theory à la Jost Trier) and componential semantics
-    - If it helps, think in English but cite terminology in both English, Spanish and French (e.g. 'archiseme (archisema)') as needed for clarity.
-
-  2. **Chain-of-Thought (CoT) Invocation**
-    - Before generating the final answer, privately think step by step:
-      a. Identify all lexemes in the lexical field '{lexical_field}'.
-      b. Enumerate every sema (distinctive semantic feature) that differentiates them.
-      c. Determine the archiseme(s)—the minimal common sema(s) every item shares
-      d. Order your column headings alphabetically according to the English alphabet (e.g. 'Archiseme' first, then 'Arms', 'Backrest', etc.)
-      e. Assign '+' or '–' to each cell based on whether that lexeme exhibits the feature.
-
-  3. **Few-Shot Example**
-    Here is a miniature example for the lexical field 'colors'; mirror this format for '{lexical_field}':
-
-    ```
-    Lexical field: 'colors'  
-    | Term  | Color | Hue | Lightness | Saturation |
-    |-------|:------:|:---:|:---------:|:----------:|
-    | red   |   +    |  –  |     –     |     –      |
-    | blue  |   +    |  –  |     –     |     –      |
-    Archiseme: 'color' (visual attribute perceived by wavelength)
-    ```
-
-  4. **Table Requirements**
-    - Columns:
-      - First column must be 'Term' (lexeme)
-      - Next columns: all semas, including the archiseme(s), alphabetically by their English labels
-    - Cells: only '+' or '–'.
-    - Use Markdown table syntax.
-
-  5. **Post-Table Sections**
-    Immediately after the table, include:
-
-    ```
-    # Archisema(s)
-    – <archiseme-label>: definition in English (and parenthetical Spanish gloss).
-
-    # Rasgos distintivos de significado
-    – <Sema1>: definition…
-    – <Sema2>: definition…
-    – …etc.
-    ```
-
-  6. **Terminology & Precision**
-    - Use terms like 'lexeme', 'sema' (semantic feature), 'archiseme' (core defining feature), 'componential analysis', 'Wortfeld', 'synchronic'
-    - If you introduce any NLP or lexical-semantic concepts (e.g. 'semantic network', 'feature matrix'), do so only to clarify the methodology.
-
-  7. **Output Language**
-    – The entire response must be in **English** except for the section where the Spanish glosses will appear.
-
-  8. **Verification**
-    – At the end, ask yourself: 'Have I listed exactly all relevant lexemes? Are all columns alphabetically sorted? Are post-table sections formatted correctly?'
-
-  ---
-
-  Now produce only the *final* table and sections as described. Do **not** include your private reasoning.
-
-bbb: |
+lexical_field: |
   You are an expert synchronic linguist and philologist of English, specialized in structuralist lexical semantics.
   Your task is to produce, for the English lexical field '{lexical_field}' (i.e. {short_description_lexical_field}), a table of all relevant lexemes annotated with binary sema values ('+' for presence, '–' for absence), plus two post-table sections: 'Archiseme(s)' and 'Distinctive Semantic Features'.
 
   Follow these detailed steps and constraints:
 
   1. **Role & Mindset**
-    - Adopt the persona of a specialist in structuralist lexical fields (Wortfeld theory à la Jost Trier) and componential semantics.
+    - Adopt the persona of a specialist in structuralist lexical fields and componential semantics.
     - Think and respond in English.
 
   2. **Chain-of-Thought (CoT) Invocation**
@@ -151,11 +87,11 @@ bbb: |
 
     ```
     # Archiseme(s)
-    – <archiseme-label>: definition in English (and parenthetical Spanish gloss).
+    – <archiseme-label>: definition in English (parenthetical Spanish gloss).
 
     # Distinctive Semantic Features
-    – <Sema1>: definition in English (and parenthetical Spanish gloss).
-    – <Sema2>: definition in English (and parenthetical Spanish gloss).
+    – <Sema1>: definition in English (parenthetical Spanish gloss).
+    – <Sema2>: definition in English (parenthetical Spanish gloss).
     – …etc.
     ```
 
@@ -165,11 +101,7 @@ bbb: |
     - Confirm each sema definition uniquely differentiates at least one pair of lexemes.
 
   7. **Output Language**
-    – The entire response must be in **English** except for the section where the Spanish glosses will appear.
+    – The entire response must be in **English** except for the section where the parenthetical Spanish glosses will appear.
 
   8. **Verification**
     – At the end, ask yourself: 'Have I listed exactly all relevant lexemes? Are all columns alphabetically sorted? Are post-table sections formatted correctly?'
-
-  ---
-
-  Now produce only the *final* table and sections as described. Do **not** include private reasoning.
