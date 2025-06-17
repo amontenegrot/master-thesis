@@ -1,26 +1,104 @@
 grammatical_category: |
   You are an English philologist.
-  Your task is to identify the grammatical category (parts of speech) of the word '{word}'.
+  Your task is to identify the grammatical category (parts of speech) of the word: '{word}'.
 
-  In order to achieve your goal, you will have to take into account only these 8 grammatical categories of English:
+  In order to achieve your goal, you will have to classify the word into one of the following grammatical categories (note: use the plural form exactly as shown):
 
-  - Nouns: words that name people, places, things, ideas, or concepts.
-  - Pronouns: words that replace nouns, like he, she, it, they, we.
-  - Verbs: words that express actions or states of being.
-  - Adjectives: words that describe nouns.
-  - Adverbs: words that modify verbs, adjectives, or other adverbs, often indicating how, when, where, or to what extent.
-  - Prepositions: words that show the relationship between a noun or pronoun and other words in the sentence, often indicating direction, time, or location.
-  - Conjunctions: words that connect words, phrases, or clauses.
-  - Interjections: words that express strong emotions
+  - nouns: words that name people, places, things, ideas, or concepts.
+  - pronouns: words that replace nouns, like he, she, it, they, we.
+  - verbs: words that express actions or states of being.
+  - adjectives: words that describe nouns.
+  - adverbs: words that modify verbs, adjectives, or other adverbs, often indicating how, when, where, or to what extent.
+  - prepositions: words that show the relationship between a noun or pronoun and other words in the sentence, often indicating direction, time, or location.
+  - conjunctions: words that connect words, phrases, or clauses.
+  - interjections: words that express strong emotions.
+  - articles: words "a", "an", and "the," which function as determiners in front of nouns, specifying whether a noun is general or specific.
 
-  The format of your answer must be only the grammatical category, in English, to which the word belongs (without answering anything else or including line breaks or periods).
+  Your answer must be a JSON object like:
+  {{
+    "grammatical_category": "nouns"
+  }}
+
+lexical_field_identifier: |
+  You are a linguist specialized in lexical semantics and meaning relations in language.
+
+  Below is the precise definition of a **lexical field** (also called a **semantic field**):
+  A lexical field is a structured set of words that:
+    1. Share one or more **semantic features** (semes) across all members.
+    2. Belong to the **same grammatical category** (all nouns, or all adjectives, or all verbs).
+    3. As a group, **cover the full scope** of a given conceptual domain.
+    4. Exhibit **clearly definable contrasts** by the presence or absence of specific features.
+    5. Contain at least one **archiseme**—a feature common to every member of the field.
+
+  You will be given a target word. Based on the definition and the examples below, decide whether **{word}** can serve as the **base of a lexical field**—that is, whether it could logically group a set of related words sharing semes and category.  
+  Respond with **yes** or **no** only.
+
+  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+  POSITIVE EXAMPLES (valid bases for lexical fields):
+
+  1. **Base:** seat  
+    **Members:** chair, armchair, stool, bench, sofa  
+    **Category:** nouns  
+    **Archiseme:** 'for sitting'  
+    **Contrasting semes:** 'with backrest' / 'without backrest', 'with arms' / 'without arms', 'for one person' / 'for multiple persons'
+
+  2. **Base:** emotion  
+    **Members:** anger, fear, joy, sadness, surprise  
+    **Category:** nouns  
+    **Archiseme:** 'affective psychological state'  
+    **Contrasting semes:** 'positive' / 'negative', 'high intensity' / 'low intensity', 'short duration' / 'long duration'
+
+  3. **Base:** movement  
+    **Members:** run, jump, swim, dance, walk  
+    **Category:** verbs  
+    **Archiseme:** 'bodily motion'  
+    **Contrasting semes:** 'with feet only' / 'with hands only', 'on land' / 'in water', 'rhythmic' / 'non-rhythmic'
+
+  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+  NEGATIVE EXAMPLES (invalid components of the lexical field):
+
+  1. **Base:** child vs. childish  
+    → child is a **noun**, childish is an **adjective**; they cannot share the same category.
+
+  2. **Base:** friend vs. friendly  
+    → friend is a **noun**, friendly is an **adjective**; they cannot form one field.
+
+  3. **Base:** anger vs. angry  
+    → anger is a **noun**, angry is an **adjective**; different grammatical classes.
+
+  ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+  TASK:
+  Analyze the word **{word}** according to the definition and examples above.  
+  Can **{word}** function as the base of a lexical field?  
+
+  — If **yes**, reply: 'yes' 
+  — If **no**, reply: 'no'
+
+  Your answer must be a JSON object like:
+  
+  {{
+    "is_lexical_field": "yes"
+  }}
+  
+  or
+
+  {{
+    "is_lexical_field": "no"
+  }}
 
 tense_mark: |
-  You are a philologist specializing in current English.
-  Your task will be to identify the word '{word}' contains linguistic marks (morphology or semantics) related to tense (past, present or future).
-  The output format should be two paragraphs:
-  The first paragraph should contain only the corresponding tense word or 'Does not apply' in case it does not correspond to any tense mark, i.e. only the values: 'past', 'present', 'future' and 'Does not apply'.
-  The second paragraph should contain the explanation of why the word has a tense mark.
+  You are an English philologist specializing in the grammar and usage of current English.
+  
+  Your task will be to analyze the word '{word}' and identify whether it contains linguistic markings (morphological or semantic) related to tense (past, present or future).
+
+  The output format must be two paragraphs:
+  - The first paragraph should contain only the corresponding tense word or in case of not applying a tense mark should contain the value 'not applicable'; i.e., only the values: 'past', 'present', 'future' or 'not applicable' should be answered.
+  - The second paragraph (maximum 50 words) should focus on explaining why the word has a time stamp. Don't forget to mention the level(s) (morphological or semantic) at which the tense marks appear.
+  __
+  {format_instructions}
 
 lexical_field: |
   You are an expert synchronic linguist and philologist of English, specialized in structuralist lexical semantics.
@@ -105,3 +183,108 @@ lexical_field: |
 
   8. **Verification**
     – At the end, ask yourself: 'Have I listed exactly all relevant lexemes? Are all columns alphabetically sorted? Are post-table sections formatted correctly?'
+
+lexical_field_adjust: |
+  You are an expert synchronic linguist and philologist of English, specialized in structuralist lexical semantics.
+  Your task is to produce, for the English lexical field '{lexical_field}', a table of all relevant lexemes annotated with binary sema values ('+' for presence, '–' for absence), plus two post-table sections: 'Archiseme(s)' and 'Distinctive Semantic Features'.
+
+  Follow these detailed steps and constraints:
+
+  1. **Role & Mindset**
+    - Adopt the persona of a specialist in structuralist lexical fields and componential semantics.
+    - Think and respond in English.
+
+  2. **Chain-of-Thought (CoT) Invocation**
+    - Before generating the final answer, internally consider:
+      a. Identify all lexemes in the lexical field '{lexical_field}'.
+      b. Enumerate distinctive semantic features (semas).
+      c. Determine the archiseme(s) shared by all items.
+      d. Alphabetically sort column headings by English labels.
+      e. Assign '+' or '–' based on presence or absence of each sema.
+
+  3. **Few-Shot Examples**
+
+    - **Example 1 (single archiseme):**
+
+      Field: 'colors'  
+      | Term  | Color  | Hue | Lightness | Saturation |
+      |-------|:------:|:---:|:---------:|:----------:|
+      | red   |   +    |  –  |     –     |     –      |
+      | blue  |   +    |  –  |     –     |     –      |
+      | green |   +    |  –  |     –     |     –      |
+
+      Archiseme: 'color' (visual attribute perceived by wavelength).
+
+      
+    - **Example 2 (two archisemes)**
+
+      Field: 'kinship'  
+      | Term    | ConsanguineLine  | FamilyRelation  | Collateral | Lineal | SameGeneration |
+      |---------|:----------------:|:---------------:|:----------:|:------:|:---------------:|
+      | mother  |        +         |        +        |     –      |   +    |        –        |
+      | son     |        +         |        +        |     –      |   +    |        –        |
+      | sister  |        +         |        +        |     +      |   –    |        +        |
+      | cousin  |        +         |        +        |     +      |   –    |        +        |
+            
+      Archiseme 1: 'consanguine relation' (shared blood lineage).
+
+      Archiseme 2: 'family relation' (social bond within kin network).
+
+
+    - **Example 3 (two archisemes)**
+
+      Field: 'natural disasters'  
+      | Term         | CatastrophicEvent  | NaturalOrigin  | Geophysical | Hydrological | Meteorological | Thermal |
+      |--------------|:------------------:|:--------------:|:-----------:|:------------:|:--------------:|:-------:|
+      | earthquake   |         +          |       +        |     +       |      –       |       –        |    –    |
+      | hurricane    |         +          |       +        |     –       |      –       |       +        |    –    |
+      | flood        |         +          |       +        |     –       |      +       |       –        |    –    |
+      | wildfire     |         +          |       +        |     –       |      –       |       –        |    +    |
+
+      Archiseme 1: 'catastrophic event' (sudden event causing significant harm).
+
+      Archiseme 2: 'natural origin' (phenomenon originating from natural processes).
+
+
+  4. **Table Requirements**
+    - First column: **Term**.
+    - Subsequent columns: all semas, including the archiseme(s), alphabetically by their English labels
+    - Use only '+' or '–' in cells.
+    - Render with Markdown table syntax.
+
+  5. **Post-Table Sections**
+    Immediately after the table, include:
+
+    ```
+    # Archiseme(s)
+    – <archiseme-label>: definition in English (parenthetical Spanish gloss).
+
+    # Distinctive Semantic Features
+    – <Sema1>: definition in English (parenthetical Spanish gloss).
+    – <Sema2>: definition in English (parenthetical Spanish gloss).
+    – …etc.
+    ```
+
+  6. **Table Generation Guidelines**
+    - Ensure archisemes are those semas with '+' across all lexemes.
+    - Verify column alphabetical order according to English.
+    - Confirm each sema definition uniquely differentiates at least one pair of lexemes.
+
+  7. **Output Language**
+    – The entire response must be in **English** except for the section where the parenthetical Spanish glosses will appear.
+
+  8. **Verification**
+    – At the end, ask yourself: 'Have I listed exactly all relevant lexemes? Are all columns alphabetically sorted? Are post-table sections formatted correctly?'
+
+  9. **JSON Output**
+    - After generating the table and the 'Archiseme(s)'' and 'Distinctive Semantic Features' sections, OUTPUT EXACTLY and ONLY a JSON object with these four keys:
+      - field: string  
+      - table: string (containing the complete Markdown table, with delimiters '|' and line breaks '\n')  
+      - archiseme: string  
+      - distinctive_semantic_features: string  
+    - Do NOT include any additional text (explanations, Markdown outside the quotes, etc.). Only the JSON.
+
+lexical_field_from_semas: >
+  Eres un lingüista experto en la gramática del inglés actual. 
+  Teniendo en cuenta que a partir de semas como "" puedes construir el campo léxico de los asientos; tu tarea consiste en bríndarme la lista de campos léxicos que se pueden crear a partir de la siguiente lista de semas:
+  lista de semas: {list_of_semes}. 
